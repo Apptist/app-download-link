@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="utf-8"/>
-  <title>앱 자동 연결</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const ua = navigator.userAgent.toLowerCase();
-      const isAndroid = ua.includes('android');
-      const isIOS     = /iphone|ipad|ipod/.test(ua);
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const ua = navigator.userAgent.toLowerCase();
+  const isAndroid = ua.includes('android');
+  const isiOS     = /iphone|ipad|ipod/.test(ua);
 
-      const target = isAndroid
-        ? 'https://play.google.com/store/apps/details?id=com.apptist.drawstraws'
-        : isIOS
-        ? 'https://apps.apple.com/kr/app/id627332548'
-        : 'https://github.com/Apptist';   // 데스크톱용 안전 링크
+  const target = isAndroid
+    ? 'https://play.google.com/store/apps/details?id=com.apptist.drawstraws'
+    : isiOS
+    ? 'https://apps.apple.com/kr/app/id627332548'
+    : 'https://github.com/Apptist';
 
-      window.location.replace(target);
-    });
-  </script>
-</head>
-<body></body>
-</html>
+  window.location.replace(target);   // 히스토리 정리
+});
+</script>
