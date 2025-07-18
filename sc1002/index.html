@@ -10,20 +10,19 @@
       const isIOS    = /iphone|ipad|ipod/.test(ua);
       const isAndroid= ua.includes('android');
 
-      const iosLink      = 'https://apps.apple.com/kr/app/id627332548';
+      const iosLink      = 'https://apps.apple.com/app/id627332548';
       const androidLink  = 'https://play.google.com/store/apps/details?id=com.apptist.drawstraws';
-      const desktopLink  = 'https://github.com/Apptist';      // 원하는 페이지로 변경
+      const desktopLink  = 'https://www.instagram.com/apptist_';
 
       const target = isIOS ? iosLink : isAndroid ? androidLink : desktopLink;
-      window.location.replace(target);   // 히스토리 정리
+      window.location.replace(target);   
     });
   </script>
 </head>
 <body>
-  <!-- SEO & 접근성 대비: 링크를 그대로도 노출 -->
   <noscript>
-    <p><a href="https://apps.apple.com/kr/app/id627332548">iOS 다운로드</a> |
-       <a href="https://play.google.com/store/apps/details?id=com.apptist.drawstraws">Android 다운로드</a></p>
+    <p><a href="https://apps.apple.com/kr/app/id627332548">iOS Download</a> |
+       <a href="https://play.google.com/store/apps/details?id=com.apptist.drawstraws">Android Download</a></p>
   </noscript>
 </body>
 </html>
