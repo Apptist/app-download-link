@@ -1,15 +1,29 @@
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const ua = navigator.userAgent.toLowerCase();
-  const isAndroid = ua.includes('android');
-  const isiOS     = /iphone|ipad|ipod/.test(ua);
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>Apptist App Auto-Redirect</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const ua       = navigator.userAgent.toLowerCase();
+      const isIOS    = /iphone|ipad|ipod/.test(ua);
+      const isAndroid= ua.includes('android');
 
-  const target = isAndroid
-    ? 'https://play.google.com/store/apps/details?id=com.apptist.drawstraws'
-    : isiOS
-    ? 'https://apps.apple.com/kr/app/id627332548'
-    : 'https://github.com/Apptist';
+      const iosLink      = 'https://apps.apple.com/kr/app/id627332548';
+      const androidLink  = 'https://play.google.com/store/apps/details?id=com.apptist.drawstraws';
+      const desktopLink  = 'https://github.com/Apptist';      // 원하는 페이지로 변경
 
-  window.location.replace(target);   // 히스토리 정리
-});
-</script>
+      const target = isIOS ? iosLink : isAndroid ? androidLink : desktopLink;
+      window.location.replace(target);   // 히스토리 정리
+    });
+  </script>
+</head>
+<body>
+  <!-- SEO & 접근성 대비: 링크를 그대로도 노출 -->
+  <noscript>
+    <p><a href="https://apps.apple.com/kr/app/id627332548">iOS 다운로드</a> |
+       <a href="https://play.google.com/store/apps/details?id=com.apptist.drawstraws">Android 다운로드</a></p>
+  </noscript>
+</body>
+</html>
