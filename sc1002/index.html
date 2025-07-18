@@ -1,36 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Redirect</title>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  <meta charset="utf-8">
+  <title>앱 자동 연결</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const ua = navigator.userAgent.toLowerCase();
+      const isAndroid = ua.includes('android');
+      const isiOS     = /iphone|ipad|ipod/.test(ua);
 
-            // Check if the user is on a mobile device
-            const isMobile = /android|iphone|ipad|ipod/i.test(userAgent);
+      const target = isAndroid
+        ? 'https://play.google.com/store/apps/details?id=com.apptist.drawstraws'
+        : isiOS
+        ? 'itms-apps://itunes.apple.com/app/id627332548'
+        : 'https://apptist.co.kr';
 
-            function getAppUrl() {
-                if (/android/i.test(userAgent)) {
-                    return 'market://details?id=com.apptist.drawstraws';
-                } else if (/iPad|iPhone|iPod/.test(userAgent)) {
-                    return 'http://itunes.apple.com/app/id627332548?mt=8';
-                } else {
-                    return 'http://apptist.co.kr'; // Fallback URL for non-mobile devices
-                }
-            }
-
-            if (isMobile) {
-                window.location.href = getAppUrl();
-            }
-        });
-    </script>
+      window.location.replace(target);
+    });
+  </script>
 </head>
-<body>
-</body>
+<body></body>
 </html>
-
-
-
