@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Apptist App Auto-Redirect</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  /* ▸ 1. 기본값 (fallback) */
+  let [iosId, androidId] = ['', ''];
+
+  /* ▸ 2. ids 파라미터로 덮어쓰기: ?ids=123456,com.foo.bar */
+  const ids = new URLSearchParams(location.search).get('ids');
+  if (ids) {
+    const pair = ids.split(',');
+    if (pair.length === 2) [iosId, androidId] = pair;
+  }
+
+  /* ▸ 3. 언어·국가 */
+  const [lang, regionRaw] = (navigator.language || 'en-US').split('-');
+  let region = (regionRaw || 'US').toLowerCase();
+  if (region === 'uk') region = 'gb';           // Apple 예외 처리
+
+  /* ▸ 4. 플랫폼별 URL */
+  const iosLink     = `https://apps.apple.com/${region}/app/id${iosId}?l=${lang.toLowerCase()}`;
+  const androidLink = `https://play.google.com/store/apps/details?id=${androidId}`;
+  const desktopLink = 'https://www.instagram.com/apptist_';
+
+  /* ▸ 5. 자동 리다이렉트 */
+  const ua         = navigator.userAgent.toLowerCase();
+  const isIOS      = /iphone|ipad|ipod/.test(ua);
+  const isAndroid  = ua.includes('android');
+  window.location.replace(isIOS ? iosLink : isAndroid ? androidLink : desktopLink);
+});
+</script>
+</head>
+<body>
+  <noscript>
+    <p><a href="https://apps.apple.com/app/id627332548">iOS Download</a> |
+       <a href="https://play.google.com/store/apps/details?id=com.apptist.drawstraws">Android Download</a></p>
+  </noscript>
+</body>
+</html>
